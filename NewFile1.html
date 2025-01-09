@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+</head>
+<body>
+<h2>Register</h2>
+<form id="registerForm">
+    <label for="regUsername">Username:</label>
+    <input type="text" id="regUsername" required><br><br>
+
+    <label for="regPassword">Password:</label>
+    <input type="password" id="regPassword" required><br><br>
+
+    <button type="submit">Register</button>
+</form>
+
+<p id="registerMessage" style="color: green;"></p>
+
+<script>
+    // Register Form Submit Event
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent form submission
+
+        // Get username and password
+        const username = document.getElementById("regUsername").value;
+        const password = document.getElementById("regPassword").value;
+
+        // Save to localStorage (for demo purposes only)
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+
+        // Show success message
+        document.getElementById("registerMessage").innerText = "Registered Successfully!";
+    });
+</script>
+</body>
+</html>

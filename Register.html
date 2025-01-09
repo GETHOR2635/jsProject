@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>REGISTER </title>
+
+        <link  rel="stylesheet" href="css/bootstrap.min.css">
+
+    </head>
+    <body>
+
+        <div class="container ">
+          
+                <div class="col">
+                <h2 >Register  </h2>
+                <form  action="index.html" method="post">
+                    <div class="form-group">
+                        <label >Username</label>
+                       <label for="username"> </label> <input type="text" id="username" class="form-control" placeholder="Enter your username" >
+                    <div class="form-group">
+                        <label >Email</label>
+                        <label for="email"></label> <input type="text" id="email" class="form-control" placeholder="Enter your email ">
+                    </div>
+                    <div class="form-group">
+                        <label >Phone </label>
+                        <label for="phone"></label><input type="tel" id="phone" class="form-control" placeholder="Enter your number">
+                    </div>
+                    <div class="form-group">
+                        <label >Password</label>
+                       <label for="password"></label> <input type="password" id="password" class="form-control" placeholder="Enter your password ">
+                    </div>
+                    <div class="form-group">
+                            <label>Confirm Password </label>
+                            <label for="confirm_password"></label><input type="password" id="confirm_password" class="form-control" placeholder="Enter your password"> 
+                    </div>
+                    <div class="form-group">
+                       <button type="button" class="btn btn-outline-success" id="submit_btn">Register </button>
+                       <a href="Login.html" class="btn btn-link">LOGIN</a>
+                       <a href="index.html" class="btn btn-link">Main page</a>
+                    </div>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+        <script>
+            let submit_btn = document.getElementById("submit_btn");
+            submit_btn.addEventListener("click",registerUser);
+
+            function registerUser(){
+                //getting elements
+                let username= document.getElementById("username");
+                let email= document.getElementById("email");
+                let phone= document.getElementById("phone");
+                let password= document.getElementById("password");
+                let confirm_password= document.getElementById("confirm_password"); 
+                let is_allowed = "true";
+                
+                //validate values
+                if(username.value === "" )
+                {
+                    is_allowed = false;
+                    username.style.borderColor ="red"
+
+                 }
+                 else{
+                    username.style.borderColor ="#ccc"
+                    
+                 }
+                 if(email.value === "" )
+                {
+                    is_allowed = false;
+                    email.style.borderColor ="red"
+
+                 }
+                 else{
+                    alert("put in correct format")
+                    email.style.borderColor ="#ccc"
+                    
+                 }
+                 if(phone.value === "" )
+                {
+                    is_allowed = false;
+                    phone.style.borderColor ="red"
+
+                 }
+                 else{
+                    phone.style.borderColor ="#ccc"
+                    
+                 }
+                 if(password.value === "" )
+                {
+                    is_allowed = false;
+                    password.style.borderColor ="red"
+
+                 }
+                 else{
+                    password.style.borderColor ="#ccc"
+                    
+                 }
+                 if(confirm_password.value === "" )
+                 {
+                    is_allowed = false;
+                    confirm_password.style.borderColor ="red"
+
+                 }
+                 else{
+                    confirm_password.style.borderColor ="#ccc"
+                    
+                 }
+                
+                 let regEx =  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                 if(regEx.test(email.value) === false){
+                    //email is not valid 
+                    is_allowed = false;
+                    email.style.borderColor ="red"
+
+                    } 
+                 else
+                    {
+                        //email is valid
+                        email.style.borderColor ="#ccc"
+
+                    }
+
+
+                    if (password.value !== confirm_password.value)
+                    {
+                        is_allowed = false;
+                        //both values are not same 
+                        alert("Both passwords are not same ")
+                        password.style.borderColor ="red"
+                        confirm_password.style.borderColor ="red"  
+
+                    }
+                    else
+                    {
+                         password.style.boderColor ="#ccc"
+                         confirm_password.style.borderColor ="#ccc"
+                    }
+
+
+                    if(is_allowed)
+                    {
+                        //user is allowed to login 
+                        if(localStorage.myUsers === undefined)
+                    {
+                        localStorage.myUsers = JSON.stringify([]);
+                        
+                    }
+                    // getting current users from local storage 
+                    let users= JSON.parse(localStorage.myUsers)
+
+                    let newUser =
+                    {
+                        "username" : username.value,
+                        "email" : email.value,
+                        "phone" : phone.value,
+                        "password" : password.value,
+                    };
+
+                    // add new users to the array 
+                    users.push(newUser)
+
+                    localStorage.myUsers = JSON.stringify(users);
+
+                    alert("Your account is created")
+
+                    window.location = "Login.html"
+                    }
+                    else{
+                        //user is not allowed to login 
+                    }
+
+
+            }
+        </script> 
+
+      
+    </body>
+    </html>
